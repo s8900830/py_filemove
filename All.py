@@ -1,6 +1,6 @@
 import os,shutil,datetime,zipfile
 from utils.logs import log
-from utils.file_check import check
+from utils.file_utils import check
 import config
 
 # 外網

@@ -1,4 +1,6 @@
 temp
 input
+output
 pre_input
-*.log
+pre_output
+logs
