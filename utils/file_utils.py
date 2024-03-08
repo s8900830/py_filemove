@@ -1,11 +1,19 @@
-import os
-import shutil
-import config
+import os,stat,shutil
 from .logs import log
 
 
 class utils:
+    # 重新命名 IDOLContent IDX檔案
+    def rename(filepath):
+        try:
+            for root, dirs, files in os.walk(filepath):
+                for name in files:
+                    if 'IDOLContent' in name:
+                        os.rename(f'{root}\{name}',f'{root}\{name.replace("Clean_",""''"")}')
+            return True
 
+        except Exception as e:
+            log.log(str(e), 'error')
     # 檔案大小與檔案名稱
     def folder_size(filepath, fileslist={}, total_size=0):
         try:
@@ -48,6 +56,15 @@ class utils:
         except Exception as e:
             log.log(str(e)+'---move', 'error')
 
+    # 給與使用者有檔案存取權限
+    def chmod(despath):
+        try:
+            os.chmod(despath,stat.S_IRWXO)
+            return True
+        
+        except Exception as e:
+            log.log(str(e)+'---move', 'error')
+
     # 刪除被壓縮的檔案
     def delete_files(inputpath):
         try:
@@ -79,7 +96,7 @@ class utils:
                 # 建立篩選方式，以檔名分
                 if 'Clean_NewsFiles' in files:
                     newsfileslist.append(files)
-                else:
+                elif 'Clean_input' in files:
                     ofileslist.append(files)
             return newsfileslist, ofileslist
 

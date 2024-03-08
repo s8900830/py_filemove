@@ -59,7 +59,8 @@ class internal:
                 fileslist=fileslist)
 
             # 移動檔案到特定位置
-            file_utils_.move_files(newsfileslist, set_internal_outputpath)
+            # file_utils_.move_files(newsfileslist, set_internal_outputpath)
+            # 因為檔案原本都在 set_internal_outputpath 的位置
             file_utils_.move_files(ofileslist, r'.\temp')
 
             # 解壓縮檔案
@@ -68,6 +69,13 @@ class internal:
 
             # 刪除 temp 內的東西
             file_utils_.delete_files(r'.\temp')
+
+            # 重新命名 IDOLContent IDX檔案
+            file_utils_.rename(filepath=set_internal_outputpath)
+
+            # 給與使用者檔案存取的權限
+            # 給與不了 故在bat中直接加入權限設定
+            # file_utils_.chmod(despath=set_internal_outputpath)
 
             return fileslist
         else:
